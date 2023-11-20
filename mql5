@@ -1,0 +1,86 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                                          Fear and Greed MT4 |
+//|                                            Copyright © 2022, Forex Robot Easy Team |
+//|                                                          https://www.forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Add indicator buffers
+    SetIndexBuffer(0, ExtMapBuffer1);
+    SetIndexBuffer(1, ExtMapBuffer2);
+    
+    // Set indicator parameters and appearance
+    SetIndexStyle(0, DRAW_LINE, STYLE_SOLID, 2, clrRed);
+    SetIndexStyle(1, DRAW_LINE, STYLE_SOLID, 2, clrBlue);
+    
+    // Set alert settings
+    Alert('Fear and Greed MT4 initialized successfully!');
+    
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total,
+                const int prev_calculated,
+                const datetime &time[],
+                const double &open[],
+                const double &high[],
+                const double &low[],
+                const double &close[],
+                const long &tick_volume[],
+                const long &volume[],
+                const int &spread[])
+{
+    // Calculate Fear and Greed level
+    double fearLevel = CalculateFearLevel();
+    double greedLevel = CalculateGreedLevel();
+    
+    // Update indicator buffers
+    for (int i = prev_calculated; i < rates_total; i++)
+    {
+        ExtMapBuffer1[i] = fearLevel;
+        ExtMapBuffer2[i] = greedLevel;
+    }
+    
+    // Check for pivot key zones
+    CheckPivotKeyZones();
+    
+    return(rates_total);
+}
+
+//+------------------------------------------------------------------+
+//| Calculate Fear level                                             |
+//+------------------------------------------------------------------+
+double CalculateFearLevel()
+{
+    // Add code to calculate Fear level
+    
+    return 0.5; // Placeholder value, replace with actual calculation
+}
+
+//+------------------------------------------------------------------+
+//| Calculate Greed level                                            |
+//+------------------------------------------------------------------+
+double CalculateGreedLevel()
+{
+    // Add code to calculate Greed level
+    
+    return 0.5; // Placeholder value, replace with actual calculation
+}
+
+//+------------------------------------------------------------------+
+//| Check for pivot key zones                                        |
+//+------------------------------------------------------------------+
+void CheckPivotKeyZones()
+{
+    // Add code to check for pivot key zones
+}
+
+//+------------------------------------------------------------------+
